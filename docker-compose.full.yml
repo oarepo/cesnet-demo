@@ -48,7 +48,7 @@ services:
     links:
       - web-api
   # API Rest Application
-  api:
+  web-api:
     extends:
       file: docker-services.yml
       service: app

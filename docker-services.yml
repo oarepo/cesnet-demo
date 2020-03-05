@@ -33,7 +33,7 @@ services:
       - INVENIO_SEARCH_ELASTIC_HOSTS
       - SEARCH_INDEX_PREFIX
   lb:
-    build: conf/haproxy/
+    build: docker/haproxy/
     image: oarepo-lb
     restart: "always"
     ports:
@@ -41,7 +41,7 @@ services:
        - "127.0.0.1:443:443"
 #      - "8080:8080"
   frontend:
-    build: conf/nginx/
+    build: docker/nginx/
     image: oarepo-frontend
     restart: "always"
 #    ports:
