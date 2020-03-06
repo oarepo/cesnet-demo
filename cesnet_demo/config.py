@@ -19,13 +19,11 @@ from __future__ import absolute_import, print_function
 from datetime import timedelta
 
 from invenio_app.config import APP_DEFAULT_SECURE_HEADERS
-from invenio_previewer.config import PREVIEWER_PREFERENCE as BASE_PREFERENCE
 
 
 def _(x):
     """Identity function used to trigger string extraction."""
     return x
-
 
 # Rate limiting
 # =============
@@ -70,7 +68,7 @@ THEME_FRONTPAGE_TEMPLATE = 'cesnet_demo/frontpage.html'
 # Email configuration
 # ===================
 #: Email address for support.
-SUPPORT_EMAIL = "bauer@cesnet.cz"
+SUPPORT_EMAIL = "du-support@cesnet.cz"
 #: Disable email sending by default.
 MAIL_SUPPRESS_SEND = True
 
@@ -147,10 +145,10 @@ APP_ALLOWED_HOSTS = ['demo.repozitar.cesnet.cz', 'localhost', '127.0.0.1']
 # =======
 OAISERVER_ID_PREFIX = 'oai:demo.repozitar.cesnet.cz:'
 
-# Previewers
+# TODO: Previewers
 # ==========
 #: Include IIIF preview for images.
-PREVIEWER_PREFERENCE = ['iiif_image'] + BASE_PREFERENCE
+# REVIEWER_PREFERENCE = ['iiif_image'] + BASE_PREFERENCE
 
 # Debug
 # =====

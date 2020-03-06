@@ -11,4 +11,4 @@ INVENIO_VERSION=${OAREPO_VERSION:-"3.2.1"}
 ES_VERSION=${OAREPO_ES_VERSION:-"es7"}
 OAREPO_TAG=${INVENIO_VERSION}-${ES_VERSION}
 
-docker build --build-arg OAREPO_TAG=${OAREPO_TAG} ../ -t oarepo-cesnet-demo:${OAREPO_TAG}
+docker build --build-arg OAREPO_TAG=${OAREPO_TAG} . -t oarepo-cesnet-demo:${OAREPO_TAG}

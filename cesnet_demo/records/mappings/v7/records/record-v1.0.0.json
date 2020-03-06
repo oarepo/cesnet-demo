@@ -1,62 +1,58 @@
 {
-  "mappings": {
-    "date_detection": false,
-    "numeric_detection": false,
-    "properties": {
-      "$schema": {
-        "type": "text",
-        "index": false
-      },
-      "title": {
-        "type": "text",
-        "copy_to": "suggest_title"
-      },
-      "suggest_title": {
-        "type": "completion"
-      },
-      "id": {
-        "type": "keyword"
-      },
-      "keywords": {
-        "type": "keyword"
-      },
-      "publication_date": {
-        "type": "date",
-        "format": "date"
-      },
-      "contributors": {
-        "type": "object",
-        "properties": {
-          "ids": {
-            "type": "object",
-            "properties": {
-              "source": {
-                "type": "text"
-              },
-              "value": {
-                "type": "keyword"
-              }
-            }
-          },
-          "affiliations": {
-            "type": "text"
-          },
-          "role": {
-            "type": "keyword"
-          },
-          "email": {
-            "type": "text"
-          },
-          "name": {
-            "type": "text"
-          }
+  "settings": {
+    "analysis": {
+      "char_filter": {
+        "configured_html_strip": {
+          "type": "html_strip",
+          "escaped_tags": []
         }
       },
-      "_created": {
-        "type": "date"
+      "normalizer": {
+        "wsnormalizer": {
+          "type": "custom",
+          "filter": [
+            "trim"
+          ]
+        }
       },
-      "_updated": {
-        "type": "date"
+      "filter": {
+        "czech_stop": {
+          "type": "stop",
+          "stopwords": "_czech_"
+        },
+        "czech_stemmer": {
+          "type": "stemmer",
+          "language": "czech"
+        }
+      },
+      "analyzer": {
+        "default": {
+          "tokenizer": "standard",
+          "filter": [
+            "lowercase",
+            "czech_stop",
+            "czech_stemmer"
+          ]
+        }
+      }
+    }
+  },
+  "mappings": {
+    "dynamic": false,
+    "date_detection": false,
+    "numeric_detection": false,
+    "allOf": [
+      {
+        "type": "invenio-v1.0.0.json#/InvenioRecord"
+      },
+      {
+        "type": "dcterms-v1.0.0.json#/DCObject"
+      }
+    ],
+    "properties": {
+      "_search": {
+        "type": "text",
+        "analyzer": "czech"
       }
     }
   }

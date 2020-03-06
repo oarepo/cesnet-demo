@@ -14,6 +14,16 @@ from setuptools import find_packages, setup
 
 readme = open('README.rst').read()
 
+tests_require = []
+
+install_requires = []
+
+setup_requires = []
+
+extras_require = {
+    'all': []
+}
+
 packages = find_packages()
 
 # Get the version string. Cannot be done with import!
@@ -32,6 +42,10 @@ setup(
     author='CESNET',
     author_email='bauer@cesnet.cz',
     url='https://github.com/oarepo/cesnet-demo',
+    extras_require=extras_require,
+    install_requires=install_requires,
+    setup_requires=setup_requires,
+    tests_require=tests_require,
     packages=packages,
     zip_safe=False,
     include_package_data=True,
@@ -48,7 +62,7 @@ setup(
         ],
         'invenio_base.api_apps': [
             'cesnet_demo = cesnet_demo.records:OARepoDemo',
-         ],
+        ],
         'invenio_jsonschemas.schemas': [
             'cesnet_demo = cesnet_demo.records.jsonschemas'
         ],

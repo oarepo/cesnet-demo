@@ -22,6 +22,10 @@ def _(x):
     """Identity function for string extraction."""
     return x
 
+
+ACL_OBJECT_ALLOWED_SCHEMAS = ('records/record-v1.0.0.json',)
+ACL_OBJECT_PREFERRED_SCHEMA = 'records/record-v1.0.0.json'
+
 RECORDS_REST_ENDPOINTS = {
     'recid': dict(
         pid_type='recid',
@@ -57,42 +61,17 @@ RECORDS_REST_ENDPOINTS = {
         update_permission_factory_imp=allow_all,
         delete_permission_factory_imp=allow_all,
         list_permission_factory_imp=allow_all,
-        links_factory_imp='invenio_records_files.'
-                          'links:default_record_files_links_factory',
+        # TODO: uncomment after upgrade to newer invenio-records-files
+        # links_factory_imp='invenio_records_files.'
+        #                   'links:default_record_files_links_factory',
     ),
 }
 """REST API for cesnet-demo."""
-
-RECORDS_UI_ENDPOINTS = dict(
-    recid=dict(
-        pid_type='recid',
-        route='/records/<pid_value>',
-        template='records/record.html',
-        record_class='invenio_records_files.api:Record',
-    ),
-    recid_previewer=dict(
-        pid_type='recid',
-        route='/records/<pid_value>/preview/<path:filename>',
-        view_imp='invenio_previewer.views.preview',
-        record_class='invenio_records_files.api:Record',
-    ),
-    recid_files=dict(
-        pid_type='recid',
-        route='/records/<pid_value>/files/<path:filename>',
-        view_imp='invenio_records_files.utils.file_download_ui',
-        record_class='invenio_records_files.api:Record',
-    ),
-)
-"""Records UI for cesnet-demo."""
-
-SEARCH_UI_JSTEMPLATE_RESULTS = 'templates/records/results.html'
-"""Result list template."""
 
 PIDSTORE_RECID_FIELD = 'id'
 
 OAREPO_DEMO_ENDPOINTS_ENABLED = True
 """Enable/disable automatic endpoint registration."""
-
 
 RECORDS_REST_FACETS = dict(
     records=dict(
@@ -107,7 +86,6 @@ RECORDS_REST_FACETS = dict(
     )
 )
 """Introduce searching facets."""
-
 
 RECORDS_REST_SORT_OPTIONS = dict(
     records=dict(
@@ -127,7 +105,6 @@ RECORDS_REST_SORT_OPTIONS = dict(
 )
 """Setup sorting options."""
 
-
 RECORDS_REST_DEFAULT_SORT = dict(
     records=dict(
         query='bestmatch',
@@ -146,3 +123,26 @@ RECORDS_FILES_REST_ENDPOINTS = {
 FILES_REST_PERMISSION_FACTORY = \
     'cesnet_demo.records.permissions:files_permission_factory'
 """Files-REST permissions factory."""
+
+FILTERS = {
+}
+
+INVENIO_OAREPO_UI_COLLECTIONS = {
+    "records": {
+        "title": {
+            "cs-cz": "Ukázkové záznamy v repozitáři",
+            "en-us": "Demo Repository Records"
+        },
+        "description": {
+            "cs-cz": """
+                Kolekce ukázkových záznamů odpovídajících DCObject metadatovému schematu.
+                """,
+            "en-us": """
+                A collection of a Demo Records that adhere to the DCObject metadata schema.
+                """
+        },
+        "rest": "/api/records/",
+        "facet_filters": list(FILTERS.keys())
+    }
+}
+"""OARepo UI collections API configuration."""

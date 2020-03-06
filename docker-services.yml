@@ -14,6 +14,7 @@ services:
         - ENVIRONMENT=DEV
     image: "oarepo-cesnet-demo:${OAREPO_VERSION}-${OAREPO_ES_VERSION}"
     environment:
+      - JSONSCHEMAS_RESOLVER_CLS
       - OAREPO_VERSION
       - OAREPO_ES_VERSION
       - APP_ALLOWED_HOSTS

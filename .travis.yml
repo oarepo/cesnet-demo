@@ -48,7 +48,8 @@ before_install:
   # Stop default travis services
   - "sudo service mysql stop"
   - "sudo service postgresql stop"
-  # Start docker services
+  # Start docker service
+  - "./docker/build-images.sh"
   - "docker-compose up -d"
   # Chrome webdriver for Selenium
   - "PATH=$PATH:$HOME/webdrivers"

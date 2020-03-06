@@ -7,11 +7,12 @@
 # details.
 #
 # Dockerfile that builds a fully functional image of your app.
-
-ARG OAREPO_TAG
 FROM oarepo/oarepo-base:3.2.1-es7
 
 COPY ./docker/overlay /
+COPY ./ ./
 
 RUN cat /etc/requirements.d/*.in | pip-compile -U -o .requirements.txt -
 RUN pip install -r .requirements.txt
+
+USER invenio

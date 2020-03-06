@@ -10,13 +10,17 @@
 
 from __future__ import absolute_import, print_function
 
+from invenio_explicit_acls.marshmallow import ACLRecordSchemaMixinV1, SchemaEnforcingMixin
 from invenio_jsonschemas import current_jsonschemas
-from invenio_records_rest.schemas import Nested, StrictKeysMixin
-from invenio_records_rest.schemas.fields import DateString, GenFunction, \
+from invenio_oarepo_dc.marshmallow import DCObjectSchemaV1Mixin
+from invenio_oarepo_invenio_model.marshmallow import InvenioRecordSchemaV1Mixin
+from invenio_records_rest.schemas import StrictKeysMixin
+from invenio_records_rest.schemas.fields import GenFunction, \
     PersistentIdentifier, SanitizedUnicode
-from marshmallow import fields, missing, validate
+from marshmallow import fields, missing
 
 from cesnet_demo.records.api import Record
+from cesnet_demo.records.config import ACL_OBJECT_ALLOWED_SCHEMAS, ACL_OBJECT_PREFERRED_SCHEMA
 
 
 def bucket_from_context(_, context):
@@ -63,14 +67,13 @@ class ContributorSchemaV1(StrictKeysMixin):
     email = fields.Email()
 
 
-class MetadataSchemaV1(StrictKeysMixin):
+class MetadataSchemaV1(SchemaEnforcingMixin,
+                       InvenioRecordSchemaV1Mixin,
+                       DCObjectSchemaV1Mixin,
+                       StrictKeysMixin):
     """Schema for the record metadata."""
-
-    id = PersistentIdentifier()
-    title = SanitizedUnicode(required=True, validate=validate.Length(min=3))
-    keywords = fields.List(SanitizedUnicode(), many=True)
-    publication_date = DateString()
-    contributors = Nested(ContributorSchemaV1, many=True, required=True)
+    ALLOWED_SCHEMAS = [*ACL_OBJECT_ALLOWED_SCHEMAS]
+    PREFERRED_SCHEMA = ACL_OBJECT_PREFERRED_SCHEMA
     _schema = GenFunction(
         attribute="$schema",
         data_key="$schema",
@@ -78,7 +81,7 @@ class MetadataSchemaV1(StrictKeysMixin):
     )
 
 
-class RecordSchemaV1(StrictKeysMixin):
+class RecordSchemaV1(StrictKeysMixin, ACLRecordSchemaMixinV1):
     """Record schema."""
 
     metadata = fields.Nested(MetadataSchemaV1)
