@@ -86,7 +86,6 @@ before_script:
   - "export DISPLAY=:99.0"
   - "if [ ${E2E} == 'yes' ]; then sh -e /etc/init.d/xvfb start; sleep 3; fi"
   # Allow services running inside docker to start
-  - "./docker/wait-for-services.sh"
 
 script:
   - docker-compose -f docker-compose.full.yml start
