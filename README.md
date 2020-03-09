@@ -81,6 +81,14 @@ docker-compose -f docker-compose.full.yml up -d
 ```
 Spins up a full production-like infrastructure for CESNET demo.
 
+### Test
+
+After the instance is deployed and running, you should be able to verify its healthiness by going to the following address:
+```
+curl -k https://localhost/.well-known/heartbeat/liveliness                                                                                                                                                                      master  33s ⬡
+{"status": true, "checks": {"database": {"time": 0.008396387100219727, "status": true}, "redis": {"time": 0.0006849765777587891, "status": true}, "elasticsearch": {"time": 0.008124113082885742, "status": true}}}%
+```
+
 ## License
 
 Copyright (C) 2020 CESNET.
