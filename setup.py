@@ -12,7 +12,7 @@ import os
 
 from setuptools import find_packages, setup
 
-readme = open('README.rst').read()
+readme = open('README.md').read()
 
 tests_require = []
 
