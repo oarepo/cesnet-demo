@@ -95,12 +95,6 @@ RECORDS_REST_SORT_OPTIONS = dict(
             default_order='desc',
             order=1,
         ),
-        mostrecent=dict(
-            title=_('Most recent'),
-            fields=['-_created'],
-            default_order='asc',
-            order=2,
-        ),
     )
 )
 """Setup sorting options."""

@@ -33,6 +33,10 @@ services:
       - INVENIO_RATELIMIT_STORAGE_URL
       - INVENIO_SEARCH_ELASTIC_HOSTS
       - SEARCH_INDEX_PREFIX
+      - PROXYIDP_URL
+      - PROXYIDP_KEY
+      - PROXYIDP_SECRET
+      - PROXYIDP_AUTHORIZE_URL
   lb:
     build: docker/haproxy/
     image: oarepo-lb

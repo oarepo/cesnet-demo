@@ -1,1 +1,2 @@
 -e .[all]
+-e 3rdparty/invenio-cesnet-proxyidp

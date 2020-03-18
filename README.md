@@ -35,6 +35,10 @@ This deployment inherits environment variables that are provided by the
 - ``INVENIO_SEARCH_ELASTIC_HOSTS``
 - ``SEARCH_INDEX_PREFIX``
 - ``JSONSCHEMAS_RESOLVER_CLS``
+- ``PROXYIDP_URL``
+- ``PROXYIDP_KEY``
+- ``PROXYIDP_SECRET``
+- ``PROXYIDP_AUTHORIZE_URL``
 
 To use them in the `docker-compose` files, feel free to copy over and modify the `.env-example` to the `.env` file.
 Any additional environment variables that are supported by Invenio can be added to your environment.
