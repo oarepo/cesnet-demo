@@ -18,12 +18,13 @@ This deployment inherits environment variables that are provided by the
 - ``WORKING_DIR=/opt/invenio``
 - ``INVENIO_INSTANCE_PATH=/opt/invenio/var/instance``
 - ``INVENIO_USER_ID=1000``
-- ``APP_ALLOWED_HOSTS``
-- ``APP_ENABLE_SECURE_HEADERS``
-- ``SERVER_NAME``
+- ``INVENIO_APP_ALLOWED_HOSTS``
+- ``INVENIO_APP_ENABLE_SECURE_HEADERS``
+- ``INVENIO_SERVER_NAME``
 - ``OAREPO_ADMIN_PASSWORD``
 - ``OAREPO_ADMIN_USER``
-- ``JSONSCHEMAS_HOST``
+- ``INVENIO_SEARCH_ELASTIC_HOSTS``
+- ``INVENIO_JSONSCHEMAS_HOST``
 - ``INVENIO_SQLALCHEMY_DATABASE_URI``
 - ``INVENIO_BROKER_URL``
 - ``INVENIO_CELERY_BROKER_URL``
@@ -32,13 +33,13 @@ This deployment inherits environment variables that are provided by the
 - ``INVENIO_CACHE_REDIS_URL``
 - ``INVENIO_ACCOUNTS_SESSION_REDIS_URL``
 - ``INVENIO_RATELIMIT_STORAGE_URL``
-- ``INVENIO_SEARCH_ELASTIC_HOSTS``
-- ``SEARCH_INDEX_PREFIX``
-- ``JSONSCHEMAS_RESOLVER_CLS``
+- ``INVENIOSEARCH_INDEX_PREFIX``
+- ``INVENIO_JSONSCHEMAS_RESOLVER_CLS``
 - ``PROXYIDP_URL``
 - ``PROXYIDP_KEY``
 - ``PROXYIDP_SECRET``
 - ``PROXYIDP_AUTHORIZE_URL``
+- ``INVENIO_APPLICATION_ROOT``
 
 To use them in the `docker-compose` files, feel free to copy over and modify the `.env-example` to the `.env` file.
 Any additional environment variables that are supported by Invenio can be added to your environment.

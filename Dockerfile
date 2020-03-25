@@ -12,6 +12,9 @@ FROM oarepo/oarepo-base:3.2.1-es7
 COPY ./docker/overlay /
 COPY ./ ./
 
+# Ensure correct permissions on copied files
+USER root
+
 WORKDIR ./3rdparty
 RUN git clone https://github.com/CESNET/invenio-cesnet-proxyidp.git
 WORKDIR ../
@@ -19,4 +22,5 @@ WORKDIR ../
 RUN cat /etc/requirements.d/*.in | pip-compile -U -o .requirements.txt -
 RUN pip install -r .requirements.txt
 
+RUN chown -R invenio ./
 USER invenio
