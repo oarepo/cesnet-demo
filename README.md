@@ -15,10 +15,10 @@ This deployment inherits environment variables that are provided by the
 
 - ``OAREPO_VERSION=3.2.1``
 - ``OAREPO_ES_VERSION=es7``
+- ``OAREPO_APP_ALLOWED_HOSTS``
 - ``WORKING_DIR=/opt/invenio``
 - ``INVENIO_INSTANCE_PATH=/opt/invenio/var/instance``
 - ``INVENIO_USER_ID=1000``
-- ``INVENIO_APP_ALLOWED_HOSTS``
 - ``INVENIO_APP_ENABLE_SECURE_HEADERS``
 - ``INVENIO_SERVER_NAME``
 - ``OAREPO_ADMIN_PASSWORD``

@@ -90,7 +90,7 @@ before_script:
 script:
   - docker-compose -f docker-compose.full.yml start
   - docker ps
-  - timeout ${LIVELINESS_TIMEOUT} bash -c 'while [[ "$(curl -k -sf -o /dev/null -w ''%{http_code}'' https://localhost/.well-known/heartbeat/liveliness)" != "200" ]]; do docker ps; sleep 5; done'
+  - timeout ${LIVELINESS_TIMEOUT} bash -c 'while [[ "$(curl -k -sf -o /dev/null -w ''%{http_code}'' https://localhost/.well-known/heartbeat/liveliness)" != "200" ]]; do docker logs cesnetdemo_web-api_1; sleep 5; done'
 #  - ./run-tests.sh # E2E tests are skipped if E2E env is set to 'no' TODO: uncomment after tests are dockerized
   - docker-compose -f docker-compose.full.yml stop
 

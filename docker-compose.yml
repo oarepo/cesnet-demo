@@ -30,10 +30,12 @@ services:
       file: docker-services.yml
       service: app
     image: "oarepo-cesnet-demo:${OAREPO_VERSION}-${OAREPO_ES_VERSION}"
-    command: [ "uwsgi" ]
+    command: [ "debug" ]
     ports:
-      - "5000"
+      - "5000:5000"
     volumes:
+      - ./docker/nginx/test.crt:/etc/nginx/test.crt
+      - ./docker/nginx/test.key:/etc/nginx/test.key
       - uploaded_data:/opt/invenio/var/instance/data
       - archived_data:/opt/invenio/var/instance/archive
       - static_data:/opt/invenio/var/instance/static
