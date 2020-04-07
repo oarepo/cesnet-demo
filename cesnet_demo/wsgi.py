@@ -1,7 +1,8 @@
 from invenio_app.wsgi_rest import application
-from oarepo_heartbeat.views import readiness, liveliness
-#from oarepo_wsgi_rest import application
+# from oarepo_wsgi_rest import application
 from invenio_app.wsgi_rest import application
+from oarepo_heartbeat.views import readiness, liveliness
+
 
 class Middleware:
     """
@@ -12,10 +13,20 @@ class Middleware:
         self.app = app
 
     def __call__(self, environ, start_response):
-        import pprint
-        pprint.pprint(dict(environ))
-        pprint.pprint(application.url_map)
-        return self.app(environ, start_response)
+        #        import pprint
+        #        pprint.pprint(dict(environ))
+        #        pprint.pprint(application.url_map)
+        rsp = None
+        with application.app_context():
+            pi = environ.get('PATH_INFO', '')
+            if pi == '/.well-known/heartbeat/readiness':
+                rsp = readiness()
+            elif pi == '/.well-known/heartbeat/liveliness':
+                rsp = liveliness()
+            if rsp:
+                return rsp(environ, start_response)
+            else:
+                return self.app(environ, start_response)
 
 
 application.wsgi_app = Middleware(application.wsgi_app)
