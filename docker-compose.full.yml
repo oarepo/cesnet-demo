@@ -53,7 +53,7 @@ services:
       file: docker-services.yml
       service: app
     image: "oarepo-cesnet-demo:${OAREPO_VERSION}-${OAREPO_ES_VERSION}"
-    command: [ "uwsgi" ]
+    command: [ "wsgi" ]
 #    ports:
 #      - "5000"
     volumes:

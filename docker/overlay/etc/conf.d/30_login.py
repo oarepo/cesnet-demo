@@ -14,4 +14,7 @@ OAUTHCLIENT_REMOTE_APPS = dict(
     proxyidp=PerunAuthRemote().remote_app(),
 )
 
-INVENIO_OAREPO_UI_LOGIN_URL = '/oauth/login/proxyidp'
+INVENIO_OAREPO_UI_LOGIN_URL = '/openid/login/proxyidp'
+
+#: Extend Registration Form with username/displaynames
+USERPROFILES_EXTEND_SECURITY_FORMS = True
