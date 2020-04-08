@@ -11,7 +11,6 @@
 from __future__ import absolute_import, print_function
 
 from invenio_explicit_acls.marshmallow import ACLRecordSchemaMixinV1, SchemaEnforcingMixin
-from invenio_jsonschemas import current_jsonschemas
 from invenio_oarepo_dc.marshmallow import DCObjectSchemaV1Mixin
 from invenio_oarepo_invenio_model.marshmallow import InvenioRecordSchemaV1Mixin
 from invenio_records_rest.schemas import StrictKeysMixin
@@ -19,52 +18,13 @@ from invenio_records_rest.schemas.fields import GenFunction, \
     PersistentIdentifier, SanitizedUnicode
 from marshmallow import fields, missing
 
-from cesnet_demo.records.api import Record
 from cesnet_demo.records.config import ACL_OBJECT_ALLOWED_SCHEMAS, ACL_OBJECT_PREFERRED_SCHEMA
 
 
-def bucket_from_context(_, context):
-    """Get the record's bucket from context."""
-    record = (context or {}).get('record', {})
-    return record.get('_bucket', missing)
-
-
 def files_from_context(_, context):
     """Get the record's files from context."""
     record = (context or {}).get('record', {})
     return record.get('_files', missing)
-
-
-def files_from_context(_, context):
-    """Get the record's files from context."""
-    record = (context or {}).get('record', {})
-    return record.get('_files', missing)
-
-
-def schema_from_context(_, context):
-    """Get the record's schema from context."""
-    record = (context or {}).get('record', {})
-    return record.get(
-        "_schema",
-        current_jsonschemas.path_to_url(Record._schema)
-    )
-
-
-class PersonIdsSchemaV1(StrictKeysMixin):
-    """Ids schema."""
-
-    source = SanitizedUnicode()
-    value = SanitizedUnicode()
-
-
-class ContributorSchemaV1(StrictKeysMixin):
-    """Contributor schema."""
-
-    ids = fields.Nested(PersonIdsSchemaV1, many=True)
-    name = SanitizedUnicode(required=True)
-    role = SanitizedUnicode()
-    affiliations = fields.List(SanitizedUnicode())
-    email = fields.Email()
 
 
 class MetadataSchemaV1(SchemaEnforcingMixin,
@@ -74,11 +34,6 @@ class MetadataSchemaV1(SchemaEnforcingMixin,
     """Schema for the record metadata."""
     ALLOWED_SCHEMAS = [*ACL_OBJECT_ALLOWED_SCHEMAS]
     PREFERRED_SCHEMA = ACL_OBJECT_PREFERRED_SCHEMA
-    _schema = GenFunction(
-        attribute="$schema",
-        data_key="$schema",
-        deserialize=schema_from_context,  # to be added only when loading
-    )
 
 
 class RecordSchemaV1(StrictKeysMixin, ACLRecordSchemaMixinV1):

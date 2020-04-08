@@ -17,7 +17,7 @@ run_post_install_hooks() {
 case $cmd in
 "wsgi")
   run_post_install_hooks
-  gunicorn -u invenio -c /etc/gunicorn/config.py -w 1 -b 0.0.0.0:5000 cesnet_demo.wsgi
+  gunicorn -u invenio -c /etc/gunicorn/config.py -w 2 -b 0.0.0.0:5000 cesnet_demo.wsgi
   ;;
 "debug")
   # TODO: move to base image

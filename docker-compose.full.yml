@@ -27,12 +27,18 @@
 # - Elasticsearch (exposed ports: 9200, 9300)
 #
 version: '2.3'
+networks:
+  default:
 services:
   # Load balancer
   # http://127.0.0.1 (redirects to https)
   # https://127.0.0.1 (application)
   # http://127.0.0.1:8080 (HAProxy statistics)
   lb:
+    networks:
+      default:
+        aliases:
+          - repozitar.cesnet.cz
     extends:
       file: docker-services.yml
       service: lb
