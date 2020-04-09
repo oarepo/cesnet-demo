@@ -10,8 +10,6 @@ services:
   app:
     build:
       context: .
-      args:
-        - ENVIRONMENT=DEV
     image: "oarepo-cesnet-demo:${OAREPO_VERSION}-${OAREPO_ES_VERSION}"
     environment:
       - OAREPO_VERSION
