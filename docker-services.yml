@@ -7,6 +7,11 @@
 
 version: '2.3'
 services:
+  ui:
+    restart: "always"
+    image: "oarepo-cesnet-demo-ui:latest"
+#    ports:
+#      - 8000:8000
   app:
     build:
       context: .

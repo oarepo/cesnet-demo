@@ -44,6 +44,12 @@ services:
       service: lb
     links:
       - frontend
+  ui:
+    extends:
+      file: docker-services.yml
+      service: ui
+    links:
+      - web-api
   # Frontend
   frontend:
     extends:

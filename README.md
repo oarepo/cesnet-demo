@@ -86,6 +86,8 @@ docker-compose -f docker-compose.full.yml up -d
 ```
 Spins up a full production-like infrastructure for CESNET demo.
 
+_Note: Full deployment requires a [cesnet-demo-ui](https://github.com/oarepo/cesnet-demo-ui) docker image to be built._
+
 ### Test
 
 After the instance is deployed and running, you should be able to verify its healthiness by going to the following address:
