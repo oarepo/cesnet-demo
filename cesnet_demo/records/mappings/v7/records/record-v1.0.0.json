@@ -53,6 +53,25 @@
       "_search": {
         "type": "text",
         "analyzer": "czech"
+      },
+      "difficulty": {
+        "type": "keyword"
+      },
+      "event": {
+        "type": "taxonomy-v1.0.0.json#/TaxonomyTerm"
+      },
+      "presenters": {
+        "type": "taxonomy-v1.0.0.json#/TaxonomyTerm"
+      },
+      "topics": {
+        "type": "taxonomy-v1.0.0.json#/TaxonomyTerm"
+      },
+      "thumbnail": {
+        "type": "object",
+        "enabled": false
+      },
+      "source": {
+        "type": "keyword"
       }
     }
   }

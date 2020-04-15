@@ -10,6 +10,39 @@
     },
     {
       "$ref": "../invenio-v1.0.0.json#/definitions/InvenioRecord"
+    },
+    {
+      "properties": {
+        "keywords": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "difficulty": {
+          "type": "string",
+          "enum": ["beginner", "advanced", "hacker"],
+          "$comment": "Expected level of knowledge about the presented topics"
+        },
+        "event": {
+          "$ref": "../taxonomy-v1.0.0.json#/definitions/TaxonomyTerm",
+          "$comment": "Conference or event where presentation took place"
+        },
+        "presenters": {
+          "$ref": "../taxonomy-v1.0.0.json#/definitions/TaxonomyTermArray"
+        },
+        "topics": {
+          "$ref": "../taxonomy-v1.0.0.json#/definitions/TaxonomyTermArray"
+        },
+        "thumbnail": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "source": {
+          "type": "string",
+          "$comment": "Source URI/code for the presentation media/player"
+        }
+      }
     }
   ],
   "required": [

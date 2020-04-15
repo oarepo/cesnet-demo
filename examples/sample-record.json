@@ -1,0 +1,14 @@
+{
+  "$schema": "https://repozitar.cesnet.cz/schemas/records/record-v1.0.0.json",
+  "id": "1",
+  "title": [{"lang":"cs", "value":"IPv6: from zero to hero"}],
+  "creator": "Radek Zajíc",
+  "created": "2020-01-01",
+  "difficulty": "beginner",
+  "identifier": "1",
+  "description": [{"lang":"cs", "value":"Pokud protokol IPv6 nemáte nasazen, moc ho neřešíte. Tedy do okamžiku, než vás kontaktuje významný partner s prosbou, zda byste mohli aktivovat IPv6 na serverech, na které chodí jeho zákazníci. Jak ale postupovat? Kde začít, když všechny vaše servery mají nastaveno disable_ipv6=1? Probrali jsme, jaký je stav IPv6 v roce 2019 ve světě GNU/Linuxu. Naťukli jsme podporu IPv6 v moderních nástrojích typu Elasticsearch, Logstash a Kibana. Probali jsme i jak si s IPv6 rozumí Docker, proč není NAT66 dobrá volba a kde tedy získat routovatelný globální IPv6 prefix pro kontejnery. Zmínili jsme i tradiční problém práce s IP adresami, tentokrát v kontextu přiřazování IPv6 adres ke konkrétní IPv6 síti ze seznamu IPv6 sítí, banování nepřizpůsobivých uživatelů ve světě IPv6 a stav GeoIP(v6)."}],
+  "modified": "2020-01-01",
+  "contributors": "",
+  "language": "cs",
+  "source": "https://www.youtube.com/watch?v=kYHlexqHIoU"
+}

@@ -10,6 +10,7 @@
 
 from __future__ import absolute_import, print_function
 
+from flask_taxonomies.marshmallow import TaxonomySchemaV1
 from invenio_explicit_acls.marshmallow import ACLRecordSchemaMixinV1, SchemaEnforcingMixin
 from invenio_oarepo_dc.marshmallow import DCObjectSchemaV1Mixin
 from invenio_oarepo_invenio_model.marshmallow import InvenioRecordSchemaV1Mixin
@@ -34,6 +35,14 @@ class MetadataSchemaV1(SchemaEnforcingMixin,
     """Schema for the record metadata."""
     ALLOWED_SCHEMAS = [*ACL_OBJECT_ALLOWED_SCHEMAS]
     PREFERRED_SCHEMA = ACL_OBJECT_PREFERRED_SCHEMA
+
+    difficulty = SanitizedUnicode(required=False)
+    keywords = fields.List(SanitizedUnicode(), required=False)
+    event = fields.Nested(TaxonomySchemaV1(), required=False)
+    presenters = fields.Nested(TaxonomySchemaV1(many=True), many=True, required=False)
+    topics = fields.Nested(TaxonomySchemaV1(many=True), many=True, required=False)
+    thumbnail = fields.Raw(required=False)
+    source = fields.Url(required=False)
 
 
 class RecordSchemaV1(StrictKeysMixin, ACLRecordSchemaMixinV1):
