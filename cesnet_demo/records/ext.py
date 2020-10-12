@@ -10,11 +10,7 @@
 
 from __future__ import absolute_import, print_function
 
-from invenio_files_rest.signals import file_deleted, file_uploaded
-from invenio_indexer.signals import before_record_index
-
-from . import config, indexer
-from .tasks import update_record_files_async
+from . import config
 
 
 class OARepoDemo(object):
@@ -29,7 +25,6 @@ class OARepoDemo(object):
         """Flask application initialization."""
         self.init_config(app)
         app.extensions['cesnet-demo'] = self
-        self._register_signals(app)
 
     def init_config(self, app):
         """Initialize configuration.
@@ -47,8 +42,8 @@ class OARepoDemo(object):
             elif k == 'PIDSTORE_RECID_FIELD':
                 app.config['PIDSTORE_RECID_FIELD'] = getattr(config, k)
             elif k == 'FILES_REST_PERMISSION_FACTORY':
-                app.config['FILES_REST_PERMISSION_FACTORY'] =\
-                        getattr(config, k)
+                app.config['FILES_REST_PERMISSION_FACTORY'] = \
+                    getattr(config, k)
             else:
                 for n in ['RECORDS_REST_ENDPOINTS', 'RECORDS_UI_ENDPOINTS',
                           'RECORDS_REST_FACETS', 'RECORDS_REST_SORT_OPTIONS',
@@ -57,13 +52,3 @@ class OARepoDemo(object):
                     if k == n and with_endpoints:
                         app.config.setdefault(n, {})
                         app.config[n].update(getattr(config, k))
-
-    def _register_signals(self, app):
-        """Register signals."""
-        before_record_index.dynamic_connect(
-            indexer.indexer_receiver,
-            sender=app,
-            index="records-record-v1.0.0")
-
-        file_deleted.connect(update_record_files_async, weak=False)
-        file_uploaded.connect(update_record_files_async, weak=False)

@@ -7,7 +7,7 @@
 # details.
 #
 # Dockerfile that builds a fully functional image of your app.
-FROM oarepo/oarepo-base:3.2.1-es7
+FROM oarepo/oarepo-base:3.3.0-es7
 
 COPY ./docker/overlay /
 COPY ./ ./
@@ -18,8 +18,9 @@ USER root
 WORKDIR ./3rdparty
 RUN git clone https://github.com/CESNET/invenio-cesnet-proxyidp.git
 WORKDIR ../
-
+RUN ls /etc/requirements.d/*.in
 RUN cat /etc/requirements.d/*.in | pip-compile -U -o .requirements.txt -
+RUN cat .requirements.txt
 RUN pip install -r .requirements.txt
 RUN sed -i 's/flask-talisman (<0.5.1,>=0.3.2)/flask-talisman (>=0.3.2)/' /opt/rh/rh-python36/root/lib/python3.6/site-packages/invenio_app-1.2.5.dist-info/METADATA
 RUN pip install flask-talisman==0.7.0 Flask-DebugToolbar

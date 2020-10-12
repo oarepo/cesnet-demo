@@ -15,7 +15,7 @@ from invenio_records_rest.facets import terms_filter
 from invenio_records_rest.utils import allow_all, check_elasticsearch
 from invenio_search import RecordsSearch
 
-from cesnet_demo.records.api import Record
+from cesnet_demo.records.record import Record, DraftRecord
 
 
 def _(x):
@@ -23,11 +23,12 @@ def _(x):
     return x
 
 
-ACL_OBJECT_ALLOWED_SCHEMAS = ('records/record-v1.0.0.json',)
-ACL_OBJECT_PREFERRED_SCHEMA = 'records/record-v1.0.0.json'
+ACL_OBJECT_ALLOWED_SCHEMAS = ('record-v1.0.0.json',)
+ACL_OBJECT_PREFERRED_SCHEMA = 'record-v1.0.0.json'
 
-RECORDS_REST_ENDPOINTS = {
+RECORDS_DRAFT_ENDPOINTS = {
     'recid': dict(
+        draft='drecid',
         pid_type='recid',
         pid_minter='recid',
         pid_fetcher='recid',
@@ -38,16 +39,13 @@ RECORDS_REST_ENDPOINTS = {
         search_index='records',
         search_type=None,
         record_serializers={
-            'application/json': ('cesnet_demo.records.serializers'
-                                 ':json_v1_response'),
+            'application/json': 'oarepo_validate:json_response',
         },
         search_serializers={
-            'application/json': ('cesnet_demo.records.serializers'
-                                 ':json_v1_search'),
+            'application/json': 'oarepo_validate:json_search',
         },
         record_loaders={
-            'application/json': ('cesnet_demo.records.loaders'
-                                 ':json_v1'),
+            'application/json': 'oarepo_validate:json_loader',
         },
         list_route='/records/',
         item_route='/records/<pid(recid,'
@@ -61,10 +59,10 @@ RECORDS_REST_ENDPOINTS = {
         update_permission_factory_imp=allow_all,
         delete_permission_factory_imp=allow_all,
         list_permission_factory_imp=allow_all,
-        # TODO: uncomment after upgrade to newer invenio-records-files
-        # links_factory_imp='invenio_records_files.'
-        #                   'links:default_record_files_links_factory',
     ),
+    'drecid': dict(
+        record_class=DraftRecord,
+    )
 }
 """REST API for cesnet-demo."""
 
