@@ -18,7 +18,7 @@ USER root
 WORKDIR ./3rdparty
 RUN git clone https://github.com/CESNET/invenio-cesnet-proxyidp.git
 WORKDIR ../
-RUN ls /etc/requirements.d/*.in
+RUN cat /etc/requirements.d/*.in
 RUN cat /etc/requirements.d/*.in | pip-compile -U -o .requirements.txt -
 RUN cat .requirements.txt
 RUN pip install -r .requirements.txt
