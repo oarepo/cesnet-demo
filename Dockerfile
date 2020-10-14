@@ -7,7 +7,7 @@
 # details.
 #
 # Dockerfile that builds a fully functional image of your app.
-FROM oarepo/oarepo-base:3.3.0-es7
+FROM oarepo/oarepo-base:latest
 
 COPY ./docker/overlay /
 COPY ./ ./
