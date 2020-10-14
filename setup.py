@@ -20,7 +20,7 @@ tests_require = [
 
 install_requires = [
     'oarepo>=3.3.0.14',
-    'oarepo-s3>=1.0.0',
+    'oarepo-s3>=1.0.1a1',
     'oarepo-rdm-records>=1.0.0',
     'oarepo-records-draft >= 5.0.0a19',
     'oarepo-validate>=1.0.0',

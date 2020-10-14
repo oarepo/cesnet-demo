@@ -8,11 +8,11 @@ PROXYIDP_CONFIG = dict(
     }
 )
 
-from invenio_cesnet_proxyidp.remote import PerunAuthRemote
-
-OAUTHCLIENT_REMOTE_APPS = dict(
-    proxyidp=PerunAuthRemote().remote_app(),
-)
+# from invenio_cesnet_proxyidp.remote import PerunAuthRemote
+#
+# OAUTHCLIENT_REMOTE_APPS = dict(
+#     proxyidp=PerunAuthRemote().remote_app(),
+# )
 
 INVENIO_OAREPO_UI_LOGIN_URL = '/openid/login/proxyidp'
 

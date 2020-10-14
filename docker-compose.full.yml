@@ -64,7 +64,6 @@ services:
     extends:
       file: docker-services.yml
       service: app
-    image: "oarepo-cesnet-demo:${OAREPO_VERSION}-${OAREPO_ES_VERSION}"
     command: [ "wsgi" ]
 #    ports:
 #      - "5000"
@@ -84,7 +83,6 @@ services:
       service: app
     restart: "always"
     command: [ "celery" ]
-    image: oarepo-cesnet-demo-worker
     links:
       - cache
       - es
