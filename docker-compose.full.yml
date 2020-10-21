@@ -64,7 +64,8 @@ services:
     extends:
       file: docker-services.yml
       service: app
-    command: [ "wsgi" ]
+    command: ["uwsgi /opt/invenio/var/instance/uwsgi_rest.ini"]
+#    command: ["sleep 10000"]
 #    ports:
 #      - "5000"
     volumes:
@@ -116,7 +117,7 @@ services:
     extends:
       file: docker-services.yml
       service: db
-  # http://guest:guest@127.0.0.1:15672
+  # http://guest:guest@127.0.0.1:15672re
   mq:
     extends:
       file: docker-services.yml

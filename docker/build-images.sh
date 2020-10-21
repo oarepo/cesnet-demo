@@ -11,4 +11,4 @@ INVENIO_VERSION=${OAREPO_VERSION:-"3.3.0"}
 ES_VERSION=${OAREPO_ES_VERSION:-"es7"}
 OAREPO_TAG=${INVENIO_VERSION}-${ES_VERSION}
 
-docker-compose -f docker-compose.full.yml build
+docker build --build-arg DEPENDENCIES_VERSION="${INVENIO_VERSION}-${ES_VERSION}" . -t oarepo-cesnet-demo

@@ -9,34 +9,29 @@ version: '2.3'
 services:
   ui:
     restart: "always"
-    image: "oarepo-cesnet-demo:${OAREPO_VERSION}-${OAREPO_ES_VERSION}"
+    image: "oarepo-cesnet-demo:latest"
 #    ports:
 #      - 8000:8000
   app:
     build:
       context: .
-    image: "oarepo-cesnet-demo:${OAREPO_VERSION}-${OAREPO_ES_VERSION}"
+    image: "oarepo-cesnet-demo:latest"
     environment:
-      - OAREPO_VERSION
-      - OAREPO_ES_VERSION
-      - OAREPO_ADMIN_PASSWORD
-      - OAREPO_ADMIN_USER
-      - OAREPO_APP_ALLOWED_HOSTS
-      - INVENIO_SEARCH_ELASTIC_HOSTS
-      - INVENIO_APPLICATION_ROOT
-      - INVENIO_SERVER_NAME
-      - INVENIO_APP_ENABLE_SECURE_HEADERS
-      - INVENIO_JSONSCHEMAS_HOST
-      - INVENIO_SQLALCHEMY_DATABASE_URI
-      - INVENIO_BROKER_URL
-      - INVENIO_CELERY_BROKER_URL
-      - INVENIO_CELERY_RESULT_BACKEND
-      - INVENIO_CACHE_TYPE
-      - INVENIO_CACHE_REDIS_URL
-      - INVENIO_ACCOUNTS_SESSION_REDIS_URL
-      - INVENIO_RATELIMIT_STORAGE_URL
-      - INVENIO_SEARCH_INDEX_PREFIX
-      - INVENIO_JSONSCHEMAS_RESOLVER_CLS
+      - "INVENIO_ACCOUNTS_SESSION_REDIS_URL=redis://cache:6379/1"
+      - "INVENIO_BROKER_URL=amqp://guest:guest@mq:5672/"
+      - "INVENIO_CACHE_REDIS_URL=redis://cache:6379/0"
+      - "INVENIO_CACHE_TYPE=redis"
+      - "INVENIO_CELERY_BROKER_URL=amqp://guest:guest@mq:5672/"
+      - "INVENIO_CELERY_RESULT_BACKEND=redis://cache:6379/2"
+      - "INVENIO_SEARCH_ELASTIC_HOSTS=['es:9200']"
+      - "INVENIO_SEARCH_INDEX_PREFIX=''"
+      - "INVENIO_SECRET_KEY=CHANGE_ME2"
+      - "INVENIO_SQLALCHEMY_DATABASE_URI"
+      - "INVENIO_WSGI_PROXIES=2"
+      - "OAREPO_APP_ALLOWED_HOSTS=web-api:5000,localhost"
+      - "INVENIO_FILES_REST_PERMISSION_FACTORY=invenio_records_rest.utils.allow_all"
+      - "INVENIO_RATELIMIT_STORAGE_URL=redis://cache:6379/3"
+      - "INVENIO_USER=invenio"
       - PROXYIDP_URL
       - PROXYIDP_KEY
       - PROXYIDP_SECRET

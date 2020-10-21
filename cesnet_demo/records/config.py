@@ -55,7 +55,7 @@ RECORDS_DRAFT_ENDPOINTS = {
         max_result_window=10000,
         error_handlers=dict(),
         create_permission_factory_imp=allow_all,
-        read_permission_factory_imp=check_elasticsearch,
+        read_permission_factory_imp=allow_all,
         update_permission_factory_imp=allow_all,
         delete_permission_factory_imp=allow_all,
         list_permission_factory_imp=allow_all,
@@ -105,14 +105,8 @@ RECORDS_REST_DEFAULT_SORT = dict(
 )
 """Set default sorting options."""
 
-RECORDS_FILES_REST_ENDPOINTS = {
-    'RECORDS_REST_ENDPOINTS': {
-        'recid': '/files'
-    },
-}
-"""Records files integration."""
-
 FILES_REST_PERMISSION_FACTORY = \
     'cesnet_demo.records.permissions:files_permission_factory'
 """Files-REST permissions factory."""
 
+FILES_REST_STORAGE_FACTORY = 'oarepo_s3.storage.s3_storage_factory'
