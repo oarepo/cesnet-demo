@@ -13,6 +13,13 @@ FROM inveniosoftware/centos8-python:3.8
 COPY ./ .
 COPY ./docker/uwsgi/ ${INVENIO_INSTANCE_PATH}
 
+# Install 3rdparty unpublished deps
+RUN pip install 3rdparty/invenio-cesnet-proxyidp poetry
+WORKDIR 3rdparty/s3-client
+RUN poetry install
+RUN pip install
+WORKDIR ../..
+
 RUN pip install .
 USER invenio
 ENTRYPOINT [ "bash", "-c"]

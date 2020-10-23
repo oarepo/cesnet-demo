@@ -49,19 +49,25 @@ RECORDS_DRAFT_ENDPOINTS = {
         },
         list_route='/records/',
         item_route='/records/<pid(recid,'
-                   'record_class="cesnet_demo.records.api.Record")'
+                   'record_class="cesnet_demo.records.record.Record")'
                    ':pid_value>',
         default_media_type='application/json',
         max_result_window=10000,
         error_handlers=dict(),
+
+    ),
+    'drecid': dict(
         create_permission_factory_imp=allow_all,
         read_permission_factory_imp=allow_all,
         update_permission_factory_imp=allow_all,
         delete_permission_factory_imp=allow_all,
         list_permission_factory_imp=allow_all,
-    ),
-    'drecid': dict(
-        record_class=DraftRecord,
+        record_class='cesnet_demo.records.record.DraftRecord',
+        files=dict(
+            put_file_factory=allow_all,
+            get_file_factory=allow_all,
+            delete_file_factory=allow_all,
+        )
     )
 }
 """REST API for cesnet-demo."""

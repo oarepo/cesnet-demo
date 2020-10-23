@@ -10,5 +10,5 @@
 
 from __future__ import absolute_import, print_function
 
-ALLOWED_SCHEMAS = ['record-v1.0.0.json']
-PREFERRED_SCHEMA = 'record-v1.0.0.json'
+ALLOWED_SCHEMAS = ['https://localhost/schemas/records/record-v1.0.0.json']
+PREFERRED_SCHEMA = 'https://localhost/schemas/records/record-v1.0.0.json'

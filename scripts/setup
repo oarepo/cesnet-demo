@@ -12,7 +12,7 @@ set -e
 invenio shell --no-term-title -c "import redis; redis.StrictRedis.from_url(app.config['CACHE_REDIS_URL']).flushall(); print('Cache cleared')"
 invenio db create
 invenio index destroy --force --yes-i-know
-invenio index init --force
+invenio index init
 invenio index queue init purge
 invenio files location --default 'default-s3' s3://oarepo
 

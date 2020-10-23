@@ -40,22 +40,22 @@ class Record(SchemaKeepingRecordMixin,
                        pid_value=self['id'], _external=True)
 
 
-class DraftRecord(DraftRecordMixin, FilesKeepingRecordMixin):
+class DraftRecord(DraftRecordMixin, FilesKeepingRecordMixin, Record):
     """CESNET DEMO draft record class."""
     def validate(self, *args, **kwargs):
         if 'created' not in self:
-            self['created'] = datetime.date.today().strftime('%Y-%m-%d')
+            self['created'] = datetime.today().strftime('%Y-%m-%d')
         if 'creator' not in self:
             if current_user.is_authenticated:
                 self['creator'] = current_user.email
             else:
                 self['creator'] = 'anonymous'
 
-        self['modified'] = datetime.date.today().strftime('%Y-%m-%d')
+        self['modified'] = datetime.today().strftime('%Y-%m-%d')
         return super().validate(*args, **kwargs)
 
     @property
     def canonical_url(self):
-        return url_for('invenio_records_rest.drecid',
+        return url_for('invenio_records_rest.drecid_item',
                        pid_value=self['id'], _external=True)
 
