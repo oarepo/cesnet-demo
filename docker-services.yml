@@ -32,10 +32,17 @@ services:
       - "INVENIO_FILES_REST_PERMISSION_FACTORY=invenio_records_rest.utils.allow_all"
       - "INVENIO_RATELIMIT_STORAGE_URL=redis://cache:6379/3"
       - "INVENIO_USER=invenio"
-      - PROXYIDP_URL
-      - PROXYIDP_KEY
-      - PROXYIDP_SECRET
-      - PROXYIDP_AUTHORIZE_URL
+      - "PROXYIDP_URL"
+      - "PROXYIDP_KEY"
+      - "PROXYIDP_SECRET"
+      - "PROXYIDP_AUTHORIZE_URL"
+      - "INVENIO_S3_CLIENT='oarepo_s3.S3Client'"
+      - "INVENIO_S3_REGION_NAME=''"
+      - "INVENIO_S3_SIGNATURE_VERSION=s3"
+      - "INVENIO_S3_TENANT"
+      - "INVENIO_S3_ACCESS_KEY_ID"
+      - "INVENIO_S3_ENDPOINT_URL"
+      - "INVENIO_S3_SECRET_ACCESS_KEY"
   lb:
     build: docker/haproxy/
     image: oarepo-lb

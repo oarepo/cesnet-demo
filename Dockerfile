@@ -17,8 +17,8 @@ COPY ./docker/uwsgi/ ${INVENIO_INSTANCE_PATH}
 RUN pip install 3rdparty/invenio-cesnet-proxyidp poetry
 WORKDIR 3rdparty/s3-client
 RUN poetry install
-RUN pip install
 WORKDIR ../..
+RUN pip install 3rdparty/s3-client
 
 RUN pip install .
 USER invenio
