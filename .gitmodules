@@ -1,0 +1,6 @@
+[submodule "3rdparty/invenio-cesnet-proxyidp"]
+	path = 3rdparty/invenio-cesnet-proxyidp
+	url = git@github.com:CESNET/invenio-cesnet-proxyidp.git
+[submodule "3rdparty/s3-client"]
+	path = 3rdparty/s3-client
+	url = git@github.com:CESNET/s3-client.git

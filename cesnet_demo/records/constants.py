@@ -6,14 +6,9 @@
 # modify it under the terms of the MIT License; see LICENSE file for more
 # details.
 
-"""Records API."""
+"""Records API constants."""
 
 from __future__ import absolute_import, print_function
 
-from invenio_records_files.api import Record as FilesRecord
-
-
-class Record(FilesRecord):
-    """Custom record."""
-
-    _schema = "records/record-v1.0.0.json"
+ALLOWED_SCHEMAS = ['https://localhost/schemas/records/record-v1.0.0.json']
+PREFERRED_SCHEMA = 'https://localhost/schemas/records/record-v1.0.0.json'

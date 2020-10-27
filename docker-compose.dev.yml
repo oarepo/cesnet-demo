@@ -32,30 +32,10 @@ services:
       file: docker-services.yml
       service: app
     command: [ "celery" ]
-    image: "oarepo-cesnet-demo:${OAREPO_VERSION}-${OAREPO_ES_VERSION}"
+    image: "oarepo-cesnet-demo:latest"
     volumes:
       - uploaded_data:/opt/invenio/var/instance/data
       - archived_data:/opt/invenio/var/instance/archive
-    links:
-      - cache
-      - es
-      - mq
-      - db
-  dev:
-    environment:
-      - FLASK_ENV=development
-    user: root
-    extends:
-      file: docker-services.yml
-      service: app
-    command: [ "wsgi" ]
-    image: "oarepo-cesnet-demo:${OAREPO_VERSION}-${OAREPO_ES_VERSION}"
-    ports:
-      - "127.0.0.1:5000:5000"
-    volumes:
-      - uploaded_data:/opt/invenio/var/instance/data
-      - archived_data:/opt/invenio/var/instance/archive
-      - static_data:/opt/invenio/var/instance/static
     links:
       - cache
       - es

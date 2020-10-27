@@ -1,0 +1,52 @@
+POST https://localhost:5000/api/draft/records/4/files/example.data/complete-multipart
+Content-Type: application/json
+
+{
+  "parts": []
+}
+### Complete an in-progress multipart-upload
+
+GET https://localhost:5000/api/draft/records/4/files/example.data
+### Get status of a multipart uploaded file
+
+PUT {{signed_part_url}}
+Content-Type:
+Access-Control-Allow-Origin: *
+
+< example.data
+### Upload a part of a file
+
+POST https://localhost/api/draft/records/1/files/?multipart=true
+Content-Type: application/json
+
+{
+  "key": "example.data",
+  "multipart_content_type": "application/octet-stream",
+  "size": "20480000"
+}
+### Create a multipart file upload directly to S3
+
+GET https://localhost:5000/api/draft/records/4/files/example.txt
+Content-Type: application/octet-stream
+### Download a draft file directly from S3
+
+PUT https://localhost:5000/api/draft/records/4/files/example.txt
+Content-Type: application/octet-stream
+
+< ./example.data
+### Attach a file to the draft and upload it to S3
+
+GET https://localhost:5000/api/draft/records/4/files/
+Accept: application/json
+### List file attachments on a draft record
+
+GET https://localhost:5000/api/draft/records/
+Accept: application/json
+### List all draft records
+
+POST https://localhost:5000/api/draft/records/
+Content-Type: application/json
+
+{"title": "test"}
+### Create a draft record
+

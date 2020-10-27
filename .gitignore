@@ -66,3 +66,6 @@ target/
 
 # Env file
 .env
+.env.dev
+.envrc
+.direnv

@@ -123,7 +123,7 @@ SQLALCHEMY_DATABASE_URI = \
 # JSONSchemas
 # ===========
 #: Hostname used in URLs for local JSONSchemas.
-JSONSCHEMAS_HOST = 'demo.repozitar.cesnet.cz'
+JSONSCHEMAS_HOST = 'repozitar.cesnet.cz'
 
 # Flask configuration
 # ===================
@@ -141,11 +141,11 @@ SESSION_COOKIE_SECURE = True
 #: provided, the allowed hosts variable is set to localhost. In production it
 #: should be set to the correct host and it is strongly recommended to only
 #: route correct hosts to the application.
-APP_ALLOWED_HOSTS = ['demo.repozitar.cesnet.cz', 'localhost', '127.0.0.1']
+APP_ALLOWED_HOSTS = ['repozitar.cesnet.cz', 'localhost', '127.0.0.1']
 
 # OAI-PMH
 # =======
-OAISERVER_ID_PREFIX = 'oai:demo.repozitar.cesnet.cz:'
+OAISERVER_ID_PREFIX = 'oai:repozitar.cesnet.cz:'
 
 # TODO: Previewers
 # ==========

@@ -14,9 +14,19 @@ from setuptools import find_packages, setup
 
 readme = open('README.md').read()
 
-tests_require = []
+tests_require = [
+    'oarepo[tests]>=3.3.0.14'
+]
 
-install_requires = []
+install_requires = [
+    'oarepo>=3.3.0.14',
+    'oarepo-s3>=1.0.1a4',
+    'oarepo-rdm-records>=1.0.1',
+    'oarepo-records-draft >= 5.0.0a19',
+    'oarepo-validate>=1.0.0',
+    'oarepo-micro-api>=1.0.2',
+    'oarepo-references>1.0.0'
+]
 
 setup_requires = []
 
@@ -55,20 +65,14 @@ setup(
             'cesnet-demo = invenio_app.cli:cli',
         ],
         'invenio_base.apps': [
-            'cesnet_demo_records = cesnet_demo.records:OARepoDemo',
+            'cesnet_demo = cesnet_demo.records:OARepoDemo',
         ],
         'invenio_config.module': [
             'cesnet_demo = cesnet_demo.config',
         ],
         'invenio_base.api_apps': [
             'cesnet_demo = cesnet_demo.records:OARepoDemo',
-        ],
-        'invenio_jsonschemas.schemas': [
-            'cesnet_demo = cesnet_demo.records.jsonschemas'
-        ],
-        'invenio_search.mappings': [
-            'records = cesnet_demo.records.mappings'
-        ],
+        ]
     },
     classifiers=[
         'Environment :: Web Environment',

@@ -64,8 +64,8 @@ services:
     extends:
       file: docker-services.yml
       service: app
-    image: "oarepo-cesnet-demo:${OAREPO_VERSION}-${OAREPO_ES_VERSION}"
-    command: [ "wsgi" ]
+    command: ["uwsgi /opt/invenio/var/instance/uwsgi_rest.ini"]
+#    command: ["sleep 10000"]
 #    ports:
 #      - "5000"
     volumes:
@@ -84,7 +84,6 @@ services:
       service: app
     restart: "always"
     command: [ "celery" ]
-    image: oarepo-cesnet-demo-worker
     links:
       - cache
       - es
@@ -118,7 +117,7 @@ services:
     extends:
       file: docker-services.yml
       service: db
-  # http://guest:guest@127.0.0.1:15672
+  # http://guest:guest@127.0.0.1:15672re
   mq:
     extends:
       file: docker-services.yml

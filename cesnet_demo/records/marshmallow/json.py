@@ -10,15 +10,10 @@
 
 from __future__ import absolute_import, print_function
 
-from invenio_explicit_acls.marshmallow import ACLRecordSchemaMixinV1, SchemaEnforcingMixin
-from invenio_oarepo_dc.marshmallow import DCObjectSchemaV1Mixin
-from invenio_oarepo_invenio_model.marshmallow import InvenioRecordSchemaV1Mixin
 from invenio_records_rest.schemas import StrictKeysMixin
 from invenio_records_rest.schemas.fields import GenFunction, \
-    PersistentIdentifier, SanitizedUnicode
+    PersistentIdentifier
 from marshmallow import fields, missing
-
-from cesnet_demo.records.config import ACL_OBJECT_ALLOWED_SCHEMAS, ACL_OBJECT_PREFERRED_SCHEMA
 
 
 def files_from_context(_, context):
@@ -27,16 +22,11 @@ def files_from_context(_, context):
     return record.get('_files', missing)
 
 
-class MetadataSchemaV1(SchemaEnforcingMixin,
-                       InvenioRecordSchemaV1Mixin,
-                       DCObjectSchemaV1Mixin,
-                       StrictKeysMixin):
+class MetadataSchemaV1(StrictKeysMixin):
     """Schema for the record metadata."""
-    ALLOWED_SCHEMAS = [*ACL_OBJECT_ALLOWED_SCHEMAS]
-    PREFERRED_SCHEMA = ACL_OBJECT_PREFERRED_SCHEMA
 
 
-class RecordSchemaV1(StrictKeysMixin, ACLRecordSchemaMixinV1):
+class RecordSchemaV1(StrictKeysMixin):
     """Record schema."""
 
     metadata = fields.Nested(MetadataSchemaV1)

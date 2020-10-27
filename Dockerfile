@@ -7,22 +7,19 @@
 # details.
 #
 # Dockerfile that builds a fully functional image of your app.
-FROM oarepo/oarepo-base:3.2.1-es7
+ARG DEPENDENCIES_VERSION=latest
+FROM inveniosoftware/centos8-python:3.8
 
-COPY ./docker/overlay /
-COPY ./ ./
+COPY ./ .
+COPY ./docker/uwsgi/ ${INVENIO_INSTANCE_PATH}
 
-# Ensure correct permissions on copied files
-USER root
+# Install 3rdparty unpublished deps
+RUN pip install 3rdparty/invenio-cesnet-proxyidp poetry
+WORKDIR 3rdparty/s3-client
+RUN poetry install
+WORKDIR ../..
+RUN pip install 3rdparty/s3-client
 
-WORKDIR ./3rdparty
-RUN git clone https://github.com/CESNET/invenio-cesnet-proxyidp.git
-WORKDIR ../
-
-RUN cat /etc/requirements.d/*.in | pip-compile -U -o .requirements.txt -
-RUN pip install -r .requirements.txt
-RUN sed -i 's/flask-talisman (<0.5.1,>=0.3.2)/flask-talisman (>=0.3.2)/' /opt/rh/rh-python36/root/lib/python3.6/site-packages/invenio_app-1.2.5.dist-info/METADATA
-RUN pip install flask-talisman==0.7.0 Flask-DebugToolbar
-RUN chown -R invenio ./
-RUN chmod -R +x /usr/bin/
+RUN pip install .
 USER invenio
+ENTRYPOINT [ "bash", "-c"]
