@@ -30,10 +30,10 @@ GET https://localhost:5000/api/draft/records/4/files/example.txt
 Content-Type: application/octet-stream
 ### Download a draft file directly from S3
 
-PUT https://localhost:5000/api/draft/records/4/files/example.txt
+PUT https://localhost:5000/api/draft/records/1/files/INSTALL.rst
 Content-Type: application/octet-stream
 
-< ./example.data
+< ./INSTALL.rst
 ### Attach a file to the draft and upload it to S3
 
 GET https://localhost:5000/api/draft/records/4/files/
